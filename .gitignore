@@ -8,3 +8,7 @@ synlog.tcl
 gerbers/
 build/
 *.pyc
+*.bin
+*.asc
+*.rpt
+bootloader.json

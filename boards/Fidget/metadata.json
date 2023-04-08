@@ -1,0 +1,19 @@
+{
+  "boardmeta": {
+    "name": "Fidget",
+    "fpga": "ice40hx4k-tq144",
+    "hver": "1.0.0",
+    "uuid": "e921b53d-a327-4ddf-b0f6-dde97de1e1dd"
+  },
+  "bootmeta": {
+    "bootloader": "TinyFPGA USB Bootloader",
+    "bver": "1.0.1",
+    "update": "https://tinyfpga.com/update/tinyfpga-bx",
+    "addrmap": {
+      "bootloader": "0x000a0-0x28000",
+      "userimage": "0x28000-0x50000",
+      "userdata": "0x50000-0x100000"
+    }
+  },
+  "port": "/dev/ttyACM2"
+}

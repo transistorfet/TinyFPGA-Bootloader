@@ -3,13 +3,14 @@
 # Package:            TQFP-144
 ###############################################################################
 
-set_io -nowarn pin_29_miso 68
-set_io -nowarn pin_30_cs 71
-set_io -nowarn pin_31_mosi 67
-set_io -nowarn pin_32_sck 70
-set_io -nowarn pin_led 56
-set_io -nowarn pin_usbp 83
-set_io -nowarn pin_usbn 82
-set_io -nowarn pin_pu 84
-set_io -nowarn pin_clk 47
+set_io -nowarn pin_miso      68
+set_io -nowarn pin_cs        71
+set_io -nowarn pin_mosi      67
+set_io -nowarn pin_sck       70
+set_io -nowarn pin_led       56
+set_io -nowarn pin_button    64
+set_io -nowarn pin_usbp      83
+set_io -nowarn pin_usbn      82
+set_io -nowarn pin_pu        84
+set_io -nowarn pin_clk       47
 

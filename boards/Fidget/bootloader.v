@@ -6,11 +6,12 @@ module bootloader (
   output pin_pu,
 
   output pin_led,
+  input pin_button,
 
-  input  pin_29_miso,
-  output pin_30_cs,
-  output pin_31_mosi,
-  output pin_32_sck
+  input  pin_miso,
+  output pin_cs,
+  output pin_mosi,
+  output pin_sck
 );
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -51,12 +52,12 @@ module bootloader (
     .SCLK()
   );
 
-	reg clk_24mhz;
-	reg clk_12mhz;
-	always @(posedge clk_48mhz) clk_24mhz = !clk_24mhz;
-	always @(posedge clk_24mhz) clk_12mhz = !clk_12mhz;
+  reg clk_24mhz;
+  reg clk_12mhz;
+  always @(posedge clk_48mhz) clk_24mhz = !clk_24mhz;
+  always @(posedge clk_24mhz) clk_12mhz = !clk_12mhz;
 
-	wire clk = clk_12mhz; // quarter speed clock
+  wire clk = clk_12mhz; // quarter speed clock
 
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -65,12 +66,15 @@ module bootloader (
   ////////
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
-  wire boot;
+  wire boot_command;
+  wire boot_any;
+
+  assign boot_any = boot_command | !pin_button;
 
   SB_WARMBOOT warmboot_inst (
     .S1(1'b0),
     .S0(1'b1),
-    .BOOT(boot)
+    .BOOT(boot_any)
   );
 
 
@@ -99,11 +103,11 @@ module bootloader (
     .usb_n_rx(usb_n_rx),
     .usb_tx_en(usb_tx_en),
     .led(pin_led),
-    .spi_miso(pin_29_miso),
-    .spi_cs(pin_30_cs),
-    .spi_mosi(pin_31_mosi),
-    .spi_sck(pin_32_sck),
-    .boot(boot)
+    .spi_miso(pin_miso),
+    .spi_cs(pin_cs),
+    .spi_mosi(pin_mosi),
+    .spi_sck(pin_sck),
+    .boot(boot_command)
   );
 
   assign pin_pu = 1'b1;
